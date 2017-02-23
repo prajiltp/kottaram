@@ -1,0 +1,13 @@
+<%if @events.blank?%>
+  Nothing to Display
+<%else%>
+	<%@events.each do |event|%>
+		<%= event.name%>
+		<%event.groups.each do |group|%>
+		   <%= group.name%>
+		   <%group.users.each do |user|%>
+		     <%=user.first_name%> <%= user.last_name%>
+		   <%end%>
+		<%end%>
+	<%end%>
+<%end%>
