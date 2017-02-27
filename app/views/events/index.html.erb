@@ -1,13 +1,30 @@
 <%if @events.blank?%>
   Nothing to Display
 <%else%>
-	<%@events.each do |event|%>
-		<%= event.name%>
-		<%event.groups.each do |group|%>
-		   <%= group.name%>
-		   <%group.users.each do |user|%>
-		     <%=user.first_name%> <%= user.last_name%>
-		   <%end%>
-		<%end%>
-	<%end%>
+
+	  <%@events.each do |event|%>
+        <table class="event-table">
+		      <tr>
+			      <th colspan="4"><%= event.name%>
+			      <%=link_to 'Join', generate_group_event_path(event), method: :put, class: 'join-button' unless current_user.part_of_event?(event)%>
+			      </th>
+		      </tr>
+		      <tr>
+	        	<td class='rules-text' colspan="4">RULES: <%= event.rules%> </td>
+	        </tr>
+        </table>
+        <table>
+			    <%event.groups.each do |group|%>
+		        <tr>
+			        <td><%= group.name%></td>
+			        <%group.users.each do |user|%>
+			            <% remaining_users = event.max_no_of_user_per_group - group.users.size + 1%>
+			            <td colspan=<%=remaining_users%>><%=user.first_name%> <%= user.last_name%></td>
+			        <%end%>
+			      </tr>
+		      <%end%>
+        </table>
+	  <%end%>
+
+
 <%end%>

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Splitwises</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @splitwises.each do |splitwise| %>
+      <tr>
+        <td><%= splitwise.purchased_at%></td>
+        <td><%= splitwise.purchasee.first_name%></td>
+        <td><%= splitwise.price%></td>
+        <td><%= link_to 'Show', splitwise %></td>
+        <td><%= link_to 'Edit', edit_splitwise_path(splitwise) %></td>
+        <td><%= link_to 'Destroy', splitwise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Splitwise', new_splitwise_path %>

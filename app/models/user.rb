@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :user_groups
   has_many :groups, through: :user_groups
   has_many :events, through: :groups
+  has_many :splitwises, foreign_key: :purchased_by
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          :omniauthable, :omniauth_providers => [:google_oauth2]
@@ -15,5 +16,9 @@ class User < ApplicationRecord
   	  @user.save!(validate: false)
   	end
     @user
+  end
+
+  def part_of_event?(event)
+    events.include? event
   end
 end

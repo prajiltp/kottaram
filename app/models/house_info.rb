@@ -1,0 +1,2 @@
+class HouseInfo < ApplicationRecord
+end

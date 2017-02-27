@@ -1,0 +1,23 @@
+<%= form_for(splitwise) do |f| %>
+  <% if splitwise.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(splitwise.errors.count, "error") %> prohibited this splitwise from being saved:</h2>
+
+      <ul>
+      <% splitwise.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  Purchased ON: <%= f.datetime_field :purchased_at %></br>
+  Item Name: <%= f.text_field :item_name %></br>
+  Item Description: <%= f.text_field :description %></br>
+  Price: <%= f.number_field :price, step: :any %></br>
+  Quantity: <%= f.number_field :quantity, step: :any %></br>
+  Remaining Quantity: <%= f.number_field :remaining_quantity, step: :any %></br>
+  Purchased_by: <%= f.collection_select :purchased_by, User.order(:first_name), :id, :first_name %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+  Purchased ON: <%= @splitwise.purchased_at %></br>
+  Item Name: <%= @splitwise.item_name %></br>
+  Item Description: <%= @splitwise.description %></br>
+  Price: <%= @splitwise.price%></br>
+  Quantity: <%= @splitwise.quantity%></br>
+  Remaining Quantity: <%= @splitwise.remaining_quantity%></br>
+  Purchased by: <%= @splitwise.purchasee.first_name%></br>
+  Added by: <%= @splitwise.creator.first_name%>
+<%= link_to 'Edit', edit_splitwise_path(@splitwise) %> |
+<%= link_to 'Back', splitwises_path %>

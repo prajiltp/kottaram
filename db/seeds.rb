@@ -7,7 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 emails = ['tpprajilkottur@gmail.com', 'aps.ashiqueps@gmail.com', 'nithindevnarayanan@gmail.com',
-'astp114@gmail.com', 'nrn369@gmail.com', 'anees.ck@gmail.com']
+'astp114@gmail.com', 'nrn369@gmail.com', 'anees.ck@gmail.com', '
+shyamraj.av@gmail.com', 'thushar.tmp@gmail.com', 'irshadkt.mec@gmail.com']
 
 emails.each do |email|
   User.find_or_create_by(email: email)

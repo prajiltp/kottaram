@@ -6,7 +6,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 	  if @user && @user.persisted?
 	    flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
-	    binding.pry
 	    sign_in @user, bypass: true
 	    redirect_to events_path
 	  else

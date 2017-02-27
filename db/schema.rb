@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223090451) do
+ActiveRecord::Schema.define(version: 20170227122330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "max_no_of_user_per_group"
+    t.integer  "max_nof_groups"
+    t.text     "rules"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -27,6 +30,29 @@ ActiveRecord::Schema.define(version: 20170223090451) do
     t.boolean  "active",     default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "house_infos", force: :cascade do |t|
+    t.integer  "name"
+    t.datetime "agreement_created"
+    t.integer  "agreement_validity"
+    t.datetime "agreement_extended_at"
+    t.integer  "extension_period"
+    t.float    "rent"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "splitwises", force: :cascade do |t|
+    t.datetime "purchased_at"
+    t.integer  "created_by"
+    t.float    "price"
+    t.string   "item_name"
+    t.text     "description"
+    t.float    "quantity"
+    t.float    "remaining_quantity"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "user_groups", force: :cascade do |t|

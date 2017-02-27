@@ -8,7 +8,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class='inner-page'>
+    <%if current_user%>
+      <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'logout') %>
+      <%if current_page?(events_path)%>
+        <%= link_to 'splitwise', splitwises_path, class: 'menu'%>
+      <%else%>
+        <%= link_to 'Events', events_path, class: 'menu'%>
+      <%end%>
+    <%end%>
     <%= yield %>
   </body>
 </html>
