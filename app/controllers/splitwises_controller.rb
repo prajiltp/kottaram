@@ -61,6 +61,13 @@ class SplitwisesController < ApplicationController
     end
   end
 
+  def analysis
+    month = params[:month] || Date.today.month
+    year = params[:year] || Date.today.year
+    @date_time = Time.new(year, month, '1', 0, 0 , 0)
+    @monthly_purchase = Splitwise.analysis(@date_time)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_splitwise

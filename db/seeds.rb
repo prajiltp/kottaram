@@ -18,3 +18,6 @@ event = Event.find_or_create_by(name: 'cleaning', max_no_of_user_per_group: 3, m
 ['team1', 'team2', 'team3'].each do |team|
   event.groups.find_or_create_by(name: team)
 end
+agreement_date = Time.new('2017', 'feb', '15')
+house = HouseInfo.find_or_create_by(name: 'kottaram', agreement_created: agreement_date,
+	agreement_validity: 11, rent: 20000)

@@ -21,4 +21,8 @@ class User < ApplicationRecord
   def part_of_event?(event)
     events.include? event
   end
+
+  def spent_amount(date_time)
+    splitwises.analysis(date_time).cost_of_purchase
+  end
 end

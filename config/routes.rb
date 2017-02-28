@@ -10,5 +10,9 @@ Rails.application.routes.draw do
   	end
   end
 
-  resources :splitwises
+  resources :splitwises do
+    collection do
+      get 'analysis'
+    end
+  end
 end
