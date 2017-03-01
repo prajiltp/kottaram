@@ -4,7 +4,8 @@ class SplitwisesController < ApplicationController
   # GET /splitwises
   # GET /splitwises.json
   def index
-    @splitwises = Splitwise.all
+    @date_time = date_time
+    @splitwises = Splitwise.analysis(@date_time)
   end
 
   # GET /splitwises/1
@@ -62,9 +63,7 @@ class SplitwisesController < ApplicationController
   end
 
   def analysis
-    month = params[:month] || Date.today.month
-    year = params[:year] || Date.today.year
-    @date_time = Time.new(year, month, '1', 0, 0 , 0)
+    @date_time = date_time
     @monthly_purchase = Splitwise.analysis(@date_time)
   end
 
@@ -80,5 +79,17 @@ class SplitwisesController < ApplicationController
       params[:splitwise][:purchased_by] ||= current_user.id
       params.require(:splitwise).permit(:quantity, :price, :remaining_quantity,
        :purchased_at, :created_by, :item_name, :description, :purchased_by)
+    end
+
+    def month
+      params[:date] ? (params[:date][:month] || Date.today.month) : Date.today.month
+    end
+
+    def year
+      params[:date] ? (params[:date][:year] || Date.today.year) : Date.today.year
+    end
+
+    def date_time
+      Time.new(year, month, '1', 0, 0 , 0)
     end
 end
