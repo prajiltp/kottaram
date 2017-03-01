@@ -59,6 +59,7 @@
         </tr>
         <% @monthly_purchase.all.collect(&:purchasee).uniq.compact.each do |user| %>
           <tr>
+            <%spent_amount = user.spent_amount(@date_time)%>
             <td><%= user.first_name%></td>
             <td><%= spent_amount%></td>
           </tr>
