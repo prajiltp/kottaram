@@ -11,11 +11,8 @@
   <body class='inner-page'>
     <%if current_user%>
       <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'logout') %>
-      <%if current_page?(events_path)%>
-        <%= link_to 'splitwise', splitwises_path, class: 'menu'%>
-      <%else%>
-        <%= link_to 'Events', events_path, class: 'menu'%>
-      <%end%>
+      <%= link_to 'splitwise', splitwises_path, class: 'menu'%>
+      | <%= link_to 'Events', events_path, class: 'menu'%>
       | <%= link_to 'Analytics', analysis_splitwises_path, class: 'menu'%>
     <%end%>
     <%= yield %>
