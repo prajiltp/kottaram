@@ -20,6 +20,7 @@ development:
 
 production:
   <<: *default
-  database: kottaram
-  username: postgres
-  password: qburst
+  host: ec2-54-235-153-124.compute-1.amazonaws.com
+  database: d7itfpndg5udfc
+  username: eemesvivbldspq
+  password: 712f70b37f25b98a98ce54e0340dd24024e2d39a7edba24934090b25e72186f8
