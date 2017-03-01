@@ -17,3 +17,9 @@ development:
   database: kottaram
   username: postgres
   password: qburst
+
+production:
+  <<: *default
+  database: kottaram
+  username: postgres
+  password: qburst
