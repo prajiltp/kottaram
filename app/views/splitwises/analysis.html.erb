@@ -49,7 +49,7 @@
       <thead>
         <tr>
           <th> Spend By / Rent</th>
-          <th> Price</th>
+          <th> Spend Amount</th>
         </tr>
       </thead>
       <tbody>
@@ -85,7 +85,7 @@
             <td><%= user.first_name%></td>
             <%spent_amount = user.spent_amount(@date_time)%>
             <td><%= user.spent_amount(@date_time)%></td>
-            <td><%= (per_head_cost - spent_amount).round(2)%></td>
+            <td><%= per_head_cost - spent_amount%></td>
           </tr>
         <% end %>
       </tbody>
