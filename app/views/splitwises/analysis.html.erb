@@ -8,88 +8,91 @@
      <%= submit_tag "Search"%>
   <% end %>
 </p>
-<div class='analytics-left'>
-  <table>
-    <thead>
-      <tr>
-        <th> Date of Purchase</th>
-        <th> Purchased By</th>
-        <th> Updated By</th>
-        <th> Price</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @monthly_purchase.first(3).each do |splitwise| %>
-        <tr>
-          <td><%= splitwise.purchased_at%></td>
-          <td><%= splitwise.purchasee.first_name%></td>
-          <td><%= splitwise.creator.first_name%></td>
-          <td><%= splitwise.price%></td>
-        </tr>
-      <% end %>
-
-      <tr>
-        <th colspan="3">Total</th>
-        <th colspan="3"><%=@monthly_purchase.cost_of_purchase%></th>
-      </tr>
-      <%if @monthly_purchase.size > 3%>
-        <tr>
-          <%= link_to 'For more details visit', splitwises_path, class: 'menu'%>
-        </tr>
-      <%end%>
-    </tbody>
-  </table>
-  <% total_expense = @monthly_purchase.total_expense%>
-  <% per_head_cost = (total_expense/User.count).to_f %>
-</div>
-<div class='analytics-mid'>
-  <div class='analytics-mid-inner'>
+<div class='analysis'>
+  <div class='analytics-left'>
     <table>
       <thead>
         <tr>
-          <th> Spend By / Rent</th>
-          <th> Spend Amount</th>
+          <th> Date of Purchase</th>
+          <th> Purchased By</th>
+          <th> Updated By</th>
+          <th> Price</th>
         </tr>
       </thead>
+
       <tbody>
-        <tr>
-          <td>Rent</td>
-          <td><%= HouseInfo.first.try(:rent).to_f%></td>
-        </tr>
-        <% @monthly_purchase.all.collect(&:purchasee).uniq.compact.each do |user| %>
+        <% @monthly_purchase.first(3).each do |splitwise| %>
           <tr>
-            <%spent_amount = user.spent_amount(@date_time)%>
-            <td><%= user.first_name%></td>
-            <td><%= spent_amount%></td>
+            <td><%= splitwise.purchased_at%></td>
+            <td><%= splitwise.purchasee.first_name%></td>
+            <td><%= splitwise.creator.first_name%></td>
+            <td><%= splitwise.price%></td>
           </tr>
         <% end %>
+
         <tr>
-          <th>Total Cost</th>
-          <th><%= total_expense%></th>
+          <th colspan="3">Total</th>
+          <th colspan="3"><%=@monthly_purchase.cost_of_purchase%></th>
         </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class='analytics-mid-inner'>
-    <table>
-      <thead>
-        <tr>
-          <th> Name</th>
-          <th> Spend Amount</th>
-          <th> Bill Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% User.all.each do |user| %>
+        <%if @monthly_purchase.size > 3%>
           <tr>
-            <td><%= user.first_name%></td>
-            <%spent_amount = user.spent_amount(@date_time)%>
-            <td><%= user.spent_amount(@date_time)%></td>
-            <td><%= per_head_cost - spent_amount%></td>
+            <%= link_to 'For more details visit', splitwises_path, class: 'menu'%>
           </tr>
-        <% end %>
+        <%end%>
       </tbody>
     </table>
+    <% total_expense = @monthly_purchase.total_expense%>
+    <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f %>
   </div>
+  <div class='analytics-mid'>
+    <div class='analytics-mid-inner'>
+      <table>
+        <thead>
+          <tr>
+            <th> Spend By / Rent</th>
+            <th> Spend Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rent</td>
+            <td><%= HouseInfo.first.try(:rent).to_f%></td>
+          </tr>
+          <% @monthly_purchase.all.collect(&:purchasee).uniq.compact.each do |user| %>
+            <tr>
+              <%spent_amount = user.spent_amount(@date_time)%>
+              <td><%= user.first_name%></td>
+              <td><%= spent_amount%></td>
+            </tr>
+          <% end %>
+          <tr>
+            <th>Total Cost</th>
+            <th><%= total_expense%></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class='analytics-mid-inner'>
+      <table>
+        <thead>
+          <tr>
+            <th> Name</th>
+            <th> Spend Amount</th>
+            <th> Bill Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% User.billable(@date_time).each do |user| %>
+            <tr>
+              <td><%= user.first_name%></td>
+              <%spent_amount = user.spent_amount(@date_time)%>
+              <td><%= user.spent_amount(@date_time)%></td>
+              <td><%= per_head_cost - spent_amount%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
 </div>

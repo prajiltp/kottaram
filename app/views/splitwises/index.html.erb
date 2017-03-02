@@ -1,34 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class='analysis'>
+  <p id="notice"><%= notice %></p>
 
-<h1>Kochu Pusthakam</h1>
-<p>
-  <%= form_tag splitwises_path, method: 'get' do %>
-     <%= select_month(@date_time || Date.today) %>
-     <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year) %>
-     <%= submit_tag "Search"%>
-  <% end %>
-</p>
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @splitwises.each do |splitwise| %>
-      <tr>
-        <td><%= splitwise.purchased_at%></td>
-        <td><%= splitwise.purchasee.first_name%></td>
-        <td><%= splitwise.price%></td>
-        <td><%= link_to 'Show', splitwise %></td>
-        <td><%= link_to 'Edit', edit_splitwise_path(splitwise) %></td>
-        <td><%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <h1>Kochu Pusthakam</h1>
+  <p>
+    <%= form_tag splitwises_path, method: 'get' do %>
+       <%= select_month(@date_time || Date.today) %>
+       <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year) %>
+       <%= submit_tag "Search"%>
     <% end %>
-  </tbody>
-</table>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-<br>
+    <tbody>
+      <% @splitwises.each do |splitwise| %>
+        <tr>
+          <td><%= splitwise.purchased_at%></td>
+          <td><%= splitwise.purchasee.first_name%></td>
+          <td><%= splitwise.price%></td>
+          <td><%= link_to 'Show', splitwise %></td>
+          <td><%= link_to 'Edit', edit_splitwise_path(splitwise) %></td>
+          <td><%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New entry to Kochu pusthakam', new_splitwise_path %>
+  <br>
+  <%= link_to 'New entry to Kochu pusthakam', new_splitwise_path, class: 'entry' %>
+</div>

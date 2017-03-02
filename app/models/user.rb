@@ -8,6 +8,8 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:google_oauth2]
   validates_uniqueness_of :email
 
+  scope :billable, -> (date_time) { where('active=true OR de_activated_at <= ?',
+    date_time.end_of_month)}
   def self.from_omniauth(auth_info)
   	info = auth_info[:info]
   	@user=User.find_by(email: info[:email])

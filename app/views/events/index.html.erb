@@ -1,9 +1,9 @@
-<%if @events.blank?%>
-  Nothing to Display
-<%else%>
-
+<div class='analysis'>
+	<%if @events.blank?%>
+	  Nothing to Display
+	<%else%>
 	  <%@events.each do |event|%>
-        <table class="event-table">
+	    <table class="event-table">
 		      <tr>
 			      <th colspan="4"><%= event.name%>
 			      <%=link_to 'Join', generate_group_event_path(event), method: :put, class: 'join-button' unless current_user.part_of_event?(event)%>
@@ -12,8 +12,8 @@
 		      <tr>
 	        	<td class='rules-text' colspan="4">RULES: <%= event.rules%> </td>
 	        </tr>
-        </table>
-        <table>
+	    </table>
+	    <table>
 			    <%event.groups.each do |group|%>
 		        <tr>
 			        <td><%= group.name%></td>
@@ -23,8 +23,7 @@
 			        <%end%>
 			      </tr>
 		      <%end%>
-        </table>
+	    </table>
 	  <%end%>
-
-
-<%end%>
+	<%end%>
+</div>
