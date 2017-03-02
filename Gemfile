@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'rake'
 
+gem 'bootstrap', '~> 4.0.0.alpha3'
+
 gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'pg'
