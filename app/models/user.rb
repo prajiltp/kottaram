@@ -8,8 +8,11 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:google_oauth2]
   validates_uniqueness_of :email
 
-  scope :billable, -> (date_time) { where('active=true OR de_activated_at <= ?',
-    date_time.end_of_month)}
+  scope :billable, -> (date_time) { where('(active=true OR de_activated_at >= ?) AND joined_at <= ?',
+    date_time.end_of_month, date_time.beginning_of_month)}
+
+  before_create :set_joined_at
+
   def self.from_omniauth(auth_info)
   	info = auth_info[:info]
   	@user=User.find_by(email: info[:email])
@@ -32,5 +35,11 @@ class User < ApplicationRecord
     self.ative = false
     self.de_activated_at = Time.now.utc
     self.save
+  end
+
+  private
+
+  def set_joined_at
+    self.joined_at = Time.now.utc
   end
 end
