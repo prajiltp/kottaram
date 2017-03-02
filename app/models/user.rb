@@ -27,4 +27,10 @@ class User < ApplicationRecord
   def spent_amount(date_time)
     splitwises.analysis(date_time).cost_of_purchase
   end
+
+  def de_activate
+    self.ative = false
+    self.de_activated_at = Time.now.utc
+    self.save
+  end
 end
