@@ -3,6 +3,8 @@ class Splitwise < ApplicationRecord
   belongs_to :purchasee, class_name: :User, foreign_key: :purchased_by
   before_validation :convert_to_utc
 
+  validates :price, presence: true
+
   scope :monthly_purchase, -> (date) {where('purchased_at >=? and purchased_at <= ?',
   	date.beginning_of_month, date.end_of_month)}
   class << self
@@ -18,7 +20,7 @@ class Splitwise < ApplicationRecord
 		end
 
 		def cost_of_purchase
-		  all.collect(&:price).inject(:+).to_f
+		  sum(&:price).to_f
 		end
   end
 

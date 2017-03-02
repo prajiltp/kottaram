@@ -23,7 +23,7 @@
         <td><%= splitwise.price%></td>
         <td><%= link_to 'Show', splitwise %></td>
         <td><%= link_to 'Edit', edit_splitwise_path(splitwise) %></td>
-        <td><%= link_to 'Destroy', splitwise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

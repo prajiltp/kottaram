@@ -10,13 +10,36 @@
       </ul>
     </div>
   <% end %>
-  Purchased ON: <%= f.datetime_field :purchased_at %></br>
-  Item Name: <%= f.text_field :item_name %></br>
-  Item Description: <%= f.text_field :description %></br>
-  Price: <%= f.number_field :price, step: :any %></br>
-  Quantity: <%= f.number_field :quantity, step: :any %></br>
-  Remaining Quantity: <%= f.number_field :remaining_quantity, step: :any %></br>
-  Purchased_by: <%= f.collection_select :purchased_by, User.order(:first_name), :id, :first_name %>
+  <table>
+    <tr>
+      <td>Purchased ON:</td>
+      <td><%= f.datetime_field :purchased_at %></td>
+    </tr>
+    <tr>
+      <td>Item Name:</td>
+      <td><%= f.text_field :item_name %></td>
+    </tr>
+    <tr>
+      <td>Item Description:</td>
+      <td><%= f.text_field :description %></td>
+    </tr>
+    <tr>
+      <td>Price:</td>
+      <td><%= f.number_field :price, step: :any %></td>
+    </tr>
+    <tr>
+      <td>Quantity: </td>
+      <td><%= f.number_field :quantity, step: :any %></td>
+    </tr>
+    <tr>
+      <td>Remaining Quantity:</td>
+      <td><%= f.number_field :remaining_quantity, step: :any %></td>
+    </tr>
+    <tr>
+      <td>Purchased_by:</td>
+      <td><%= f.collection_select :purchased_by, User.order(:first_name), :id, :first_name %></td>
+    </tr>
+  </table>
   <div class="actions">
     <%= f.submit %>
   </div>
