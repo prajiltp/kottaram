@@ -11,6 +11,7 @@ class GroupsController < ApplicationController
 
   def skipped
     if @group
+      authorize @group
       @group.skip_for_slot
       redirect_to events_path
     end

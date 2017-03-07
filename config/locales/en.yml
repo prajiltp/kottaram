@@ -25,3 +25,4 @@ en:
     default: 'You cannot perform this action.'
     group_policy:
       completed?: "You are part of this team please ask other team's member to do the same!"
+      skipped?: "You are part of this team please ask other team's member to do the same!"
