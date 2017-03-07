@@ -37,6 +37,10 @@ class User < ApplicationRecord
     self.save
   end
 
+  def part_of?(group)
+    group.users.include? self
+  end
+
   private
 
   def set_joined_at

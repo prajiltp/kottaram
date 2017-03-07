@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   	member do
   	  put 'generate_group'
   	end
+    resources :groups, only: [:show] do
+      member do
+        put 'completed'
+      end
+    end
   end
 
   resources :splitwises do

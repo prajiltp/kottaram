@@ -15,4 +15,42 @@ class Event < ApplicationRecord
   	end
   	[@group, errors]
   end
+
+  def cleaning?
+    name == 'cleaning'
+  end
+
+  def cooking?
+    name == 'Breakfast'
+  end
+
+  def next_group(group)
+    groups.order(:id).where('id>?', group.id).first || groups.order(:id).first
+  end
+
+  def next_date(group)
+    date = group ? group.event_date : Time.now.utc.to_date
+    next_business_day(date)
+  end
+
+  def next_business_day(date)
+    interval >= 1 ? skip_weekends(date, interval) : skip_weekends(date, 1)
+  end
+
+  def skip_weekends(date, inc)
+    date += inc
+    while (date.wday % 7 == 0) or (date.wday % 7 == 6) do
+      date += inc
+    end
+    date
+  end
+
+  def next_slot(current_group, next_group)
+    if current_group.event_date.friday?
+      next_group.event_date = event.next_date(current_group)
+      next_group.morning!
+    else
+      current_group.evening? ? next_group.morning! : next_group.evening!
+    end
+  end
 end

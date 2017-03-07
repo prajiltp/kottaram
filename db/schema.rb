@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302101604) do
+ActiveRecord::Schema.define(version: 20170307063254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170302101604) do
     t.integer  "max_no_of_user_per_group"
     t.integer  "max_nof_groups"
     t.text     "rules"
+    t.float    "interval"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -30,6 +31,9 @@ ActiveRecord::Schema.define(version: 20170302101604) do
     t.boolean  "active",     default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "status",     default: 0
+    t.integer  "slot",       default: 0
+    t.date     "event_date"
   end
 
   create_table "house_infos", force: :cascade do |t|

@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   protect_from_forgery with: :exception
 
   before_action :authenticate_and_configure, :set_time_zone
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def authenticate_and_configure
   	redirect_to root_path unless current_user
@@ -21,5 +23,11 @@ class ApplicationController < ActionController::Base
 
   def set_time_zone
     Time.zone = 'Chennai'
+  end
+
+  def user_not_authorized(exception)
+    policy_name = exception.policy.class.to_s.underscore
+    error = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
+    redirect_to request.referrer, flash: {error: error}
   end
 end
