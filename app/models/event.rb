@@ -28,13 +28,17 @@ class Event < ApplicationRecord
     groups.order(:id).where('id>?', group.id).first || groups.order(:id).first
   end
 
-  def next_date(group)
+  def next_date(group, count=nil)
     date = group ? group.event_date : Time.now.utc.to_date
-    next_business_day(date)
+    next_business_day(date, count)
   end
 
-  def next_business_day(date)
-    interval >= 1 ? skip_weekends(date, interval) : skip_weekends(date, 1)
+  def next_business_day(date, count)
+    if count
+      skip_weekends(date, count)
+    else
+      interval >= 1 ? skip_weekends(date, interval) : skip_weekends(date, 1)
+    end
   end
 
   def skip_weekends(date, inc)
@@ -47,10 +51,29 @@ class Event < ApplicationRecord
 
   def next_slot(current_group, next_group)
     if current_group.event_date.friday?
-      next_group.event_date = event.next_date(current_group)
+      next_group.event_date = next_date(current_group)
       next_group.morning!
     else
-      current_group.evening? ? next_group.morning! : next_group.evening!
+      if current_group.evening?
+        next_group.event_date = next_date(current_group)
+        next_group.morning!
+      else
+        next_group.evening!
+      end
+    end
+  end
+
+  def move_to_next_slot(group)
+    if group.event_date.friday?
+      group.event_date = next_date(group)
+      group.morning!
+    else
+      if group.evening?
+        group.event_date = next_date(group)
+        group.morning!
+      else
+        group.evening!
+      end
     end
   end
 end

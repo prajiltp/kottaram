@@ -26,6 +26,7 @@
 			          <td><%= group.event_date%></td>
 			          <td><%= group.slot%></td>
 			          <td><%=link_to 'Mark As complete', completed_event_group_path(event, group), method: :put, class: 'join-button'%></td>
+			          <td><%=link_to 'SKIP The day', skipped_event_group_path(event, group), method: :put, class: 'join-button'%></td>
 			        <%end%>
 			      </tr>
 		      <%end%>

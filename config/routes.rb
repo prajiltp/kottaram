@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :groups, only: [:show] do
       member do
         put 'completed'
+        put 'skipped'
       end
     end
   end

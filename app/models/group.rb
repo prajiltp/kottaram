@@ -23,4 +23,13 @@ class Group < ApplicationRecord
     end
     self.turn_active!
   end
+
+  def skip_for_slot
+    if event.cooking?
+      event.move_to_next_slot(self)
+    else
+      self.event_date = event.next_date(self, 1)
+      self.save
+    end
+  end
 end

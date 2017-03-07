@@ -9,6 +9,13 @@ class GroupsController < ApplicationController
   	end
   end
 
+  def skipped
+    if @group
+      @group.skip_for_slot
+      redirect_to events_path
+    end
+  end
+
   private
 
   def set_group
