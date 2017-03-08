@@ -1,4 +1,6 @@
 class Group < ApplicationRecord
+  include ThreadUtility
+
   belongs_to :event
   has_many :user_groups
   has_many :users, through: :user_groups
@@ -12,6 +14,11 @@ class Group < ApplicationRecord
     next_group = event.next_group(self)
     next_group.assign_event(self)
     self.done!
+    thread do
+      event_name = event.cooking? ? 'cooking' : event.name
+      subject = "Re-assigned #{event_name} for #{slot} on #{event_date}"
+      users.map {|user| EventMailer.changed_event(user, event, subject, 'plus').deliver!}
+    end
   end
 
   def assign_event(current_group)
@@ -30,6 +37,11 @@ class Group < ApplicationRecord
     else
       self.event_date = event.next_date(self, 1)
       self.save
+    end
+    thread do
+      event_name = event.cooking? ? 'cooking' : event.name
+      subject = "Skipped #{event_name} to #{slot} on #{event_date}"
+      users.map {|user| EventMailer.changed_event(user, event, subject, 'negative').deliver!}
     end
   end
 end
