@@ -58,6 +58,7 @@ class Event < ApplicationRecord
         next_group.event_date = next_date(current_group)
         next_group.morning!
       else
+        next_group.event_date = current_group.event_date
         next_group.evening!
       end
     end
