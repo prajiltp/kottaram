@@ -15,21 +15,21 @@
 	        </tr>
 	    </table>
 	    <table>
-			    <%event.groups.order(:id).each do |group|%>
-		        <tr>
-			        <td><%= group.name%></td>
-			        <%group.users.each do |user|%>
-			            <% remaining_users = event.max_no_of_user_per_group - group.users.size + 1%>
-			            <td colspan=<%=remaining_users%>><%=user.first_name%> <%= user.last_name%></td>
-			        <%end%>
-			        <%if group.turn_active?%>
-			          <td><%= group.event_date%></td>
-			          <td><%= group.slot%></td>
-			          <td><%=link_to 'Mark As complete', completed_event_group_path(event, group), method: :put, class: 'join-button'%></td>
-			          <td><%=link_to 'SKIP The day', skipped_event_group_path(event, group), method: :put, class: 'join-button'%></td>
-			        <%end%>
-			      </tr>
-		      <%end%>
+		    <%event.groups.order(:id).each do |group|%>
+	          <tr>
+		        <td><%= group.name%></td>
+		        <%group.users.each do |user|%>
+		            <% remaining_users = event.max_no_of_user_per_group - group.users.size + 1%>
+		            <td colspan=<%=remaining_users%>><%=user.first_name%> <%= user.last_name%></td>
+		        <%end%>
+		        <%if group.turn_active?%>
+		          <td><%= group.event_date%></td>
+		          <td><%= group.slot%></td>
+		          <td><%=link_to 'Mark As complete', completed_event_group_path(event, group), method: :put, class: 'join-button'%></td>
+		          <td><%=link_to 'SKIP The day', skipped_event_group_path(event, group), method: :put, class: 'join-button'%></td>
+		        <%end%>
+		      </tr>
+	        <%end%>
 	    </table>
 	  <%end%>
 	<%end%>

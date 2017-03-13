@@ -1,5 +1,12 @@
 <div ng-app="kottaram">
      <div class='home-layout'>
+        <%unless flash.blank?%>
+          <div class='col-sm-12 text-center alert alert-danger'%>
+		        <%flash.each do |key, value|%>
+		          <%=value%>
+		        <%end%>
+		      </div>
+        <%end%>
      	<%= link_to (image_tag('sign-in-button.png', class: 'sign-in-button')), user_google_oauth2_omniauth_authorize_path %>
      </div>
 </div>

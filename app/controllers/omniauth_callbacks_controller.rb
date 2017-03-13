@@ -10,7 +10,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	    redirect_to events_path
 	  else
 	    session["devise.google_data"] = request.env["omniauth.auth"].except(:extra) #Removing extra as it can overflow some session stores
-	    redirect_to root_path, alert: "Ningal njanglude vittile allalala"
+	    redirect_to root_path, alert: t("devise.omniauth_callbacks.error.not_registered")
 	  end
   end
 

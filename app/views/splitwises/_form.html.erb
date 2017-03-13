@@ -37,7 +37,7 @@
     </tr>
     <tr>
       <td>Purchased_by:</td>
-      <td><%= f.collection_select :purchased_by, User.order(:first_name), :id, :first_name, selected: (current_user.id if f.object.new_record?) %></td>
+      <td><%= f.collection_select :purchased_by, User.order(:first_name), :id, :first_name, selected: (f.object.new_record? ? current_user.id : f.object.purchased_by) %></td>
     </tr>
   </table>
   <div class="actions">

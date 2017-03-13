@@ -26,3 +26,8 @@ en:
     group_policy:
       completed?: "You are part of this team please ask other team's member to do the same!"
       skipped?: "You are part of this team please ask other team's member to do the same!"
+  devise:
+    omniauth_callbacks:
+      error:
+        not_registered: 'Sorry you are not yet part of our Kottaram. If you are,  please contact any other members '
+
