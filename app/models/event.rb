@@ -52,7 +52,7 @@ class Event < ApplicationRecord
   def next_slot(current_group, next_group)
     if current_group.event_date.friday?
       next_group.event_date = next_date(current_group)
-      next_group.morning!
+      next_group.evening!
     else
       if current_group.evening?
         next_group.event_date = next_date(current_group)
@@ -67,7 +67,7 @@ class Event < ApplicationRecord
   def move_to_next_slot(group)
     if group.event_date.friday?
       group.event_date = next_date(group)
-      group.morning!
+      group.evening!
     else
       if group.evening?
         group.event_date = next_date(group)
