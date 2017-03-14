@@ -2,5 +2,4 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
-  # Find any date inputs and override their functionality
   $('#splitwise_purchased_at').datetimepicker();
