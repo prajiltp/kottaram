@@ -9,7 +9,7 @@ class Splitwise < ApplicationRecord
   	date.beginning_of_month, date.end_of_month)}
   class << self
     def analysis(date_time)
-	    monthly_purchase = monthly_purchase(date_time).order(:purchased_at)
+	    monthly_purchase = monthly_purchase(date_time).order('purchased_at DESC')
 	  end
 
 		def total_expense
