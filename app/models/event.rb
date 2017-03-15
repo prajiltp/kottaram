@@ -17,11 +17,11 @@ class Event < ApplicationRecord
   end
 
   def cleaning?
-    name == 'cleaning'
+    name.downcase == 'cleaning'
   end
 
   def cooking?
-    name == 'Breakfast'
+    name.downcase == 'cooking'
   end
 
   def next_group(group)
