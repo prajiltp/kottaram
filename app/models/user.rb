@@ -35,6 +35,8 @@ class User < ApplicationRecord
     self.active = false
     self.de_activated_at = Time.now.utc
     self.save
+    # Remove User from active groups
+    self.user_groups.destroy_all
   end
 
   def part_of?(group)
