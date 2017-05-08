@@ -32,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def de_activate
-    self.ative = false
+    self.active = false
     self.de_activated_at = Time.now.utc
     self.save
   end
