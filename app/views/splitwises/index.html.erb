@@ -6,7 +6,7 @@
     <%= form_tag splitwises_path, method: 'get' do %>
        <%= select_month(@date_time || Date.today) %>
        <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year) %>
-       <%= submit_tag "Search"%>
+       <%= submit_tag "Apply"%>
     <% end %>
   </p>
   <table>
