@@ -5,9 +5,9 @@
   <%= link_to 'New entry to Kochu pusthakam', new_splitwise_path, class: 'entry btn btn-primary btn-sm' %>
   <p>
     <%= form_tag splitwises_path, method: 'get' do %>
-       <%= select_month(@date_time || Date.today) %>
-       <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year) %>
-       <%= submit_tag "Apply"%>
+       <%= select_month(@date_time || Date.today), class : 'form-control' %>
+       <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year), class : 'form-control' %>
+       <%= submit_tag "Apply", class: 'btn btn-primary btn-sm'%>
     <% end %>
   </p>
   <table class="table table-striped">
