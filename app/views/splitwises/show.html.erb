@@ -1,40 +1,46 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <p id="notice"><%= notice %></p>
+    <ul class="list-group">
+      <li class="list-group-item justify-content-between">
+        <span>Purchased ON</span>
+         <span><%= @splitwise.purchased_at %></span>
+      </li>
+      <li class="list-group-item justify-content-between">
+        <span>Item Name</span>
+         <span><%= @splitwise.item_name %></span>
+      </li>
+      <li class="list-group-item justify-content-between">
+        <span>Item Description</span>
+         <span><%= @splitwise.description %></span>
+      </li>
+      <li class="list-group-item justify-content-between">
+        <span>Price</span>
+         <span><%= @splitwise.price%></span>
+      </li>
+      <li class="list-group-item justify-content-between">
+        <span>Quantity</span>
+         <span><%= @splitwise.quantity%></span>
+      </li>
+      <li class="list-group-item justify-content-between">
+        <span>Remaining Quantity</span>
+         <span><%= @splitwise.remaining_quantity%></span>
+      </li>
+      <li class="list-group-item justify-content-between">
+        <span>Purchased by</span>
+         <span><%= @splitwise.purchasee.first_name%></span>
+      </li>
+      <li class="list-group-item justify-content-between">
+        <span>Added by</span>
+         <span><%= @splitwise.creator.first_name%></span>
+      </li>
+    </ul>
 
-<ul class="list-group">
-  <li class="list-group-item justify-content-between">
-    <span class="badge badge-default badge-pill">Purchased ON</span>
-    <%= @splitwise.purchased_at %>
-  </li>
-  <li class="list-group-item justify-content-between">
-    <span class="badge badge-default badge-pill">Item Name</span>
-    <%= @splitwise.item_name %>
-  </li>
-  <li class="list-group-item justify-content-between">
-    <span class="badge badge-default badge-pill">Item Description</span>
-    <%= @splitwise.description %>
-  </li>
-  <li class="list-group-item justify-content-between">
-    <span class="badge badge-default badge-pill">Price</span>
-    <%= @splitwise.price%>
-  </li>
-  <li class="list-group-item justify-content-between">
-    <span class="badge badge-default badge-pill">Quantity</span>
-    <%= @splitwise.quantity%>
-  </li>
-  <li class="list-group-item justify-content-between">
-    <span class="badge badge-default badge-pill">Remaining Quantity</span>
-    <%= @splitwise.remaining_quantity%>
-  </li>
-  <li class="list-group-item justify-content-between">
-    <span class="badge badge-default badge-pill">Purchased by</span>
-    <%= @splitwise.purchasee.first_name%>
-  </li>
-  <li class="list-group-item justify-content-between">
-    <span class="badge badge-default badge-pill">Added by</span>
-    <%= @splitwise.creator.first_name%>
-  </li>
-</ul>
-<div class="btn-group" role="group" aria-label="Basic example">
-    <%= link_to 'Edit', edit_splitwise_path(@splitwise), class: 'btn btn-secondary' %>
-    <%= link_to 'Back', splitwises_path , class: 'btn btn-secondary'%>
+    <div class="btn-group mt-20" role="group" aria-label="Basic example">
+        <%= link_to 'Edit', edit_splitwise_path(@splitwise), class: 'btn btn-primary' %>
+        <%= link_to 'Back', splitwises_path , class: 'btn btn-primary'%>
+    </div>
 </div>
+
+
+
+
