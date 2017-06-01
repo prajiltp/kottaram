@@ -10,33 +10,21 @@
        <%= submit_tag "Apply"%>
     <% end %>
   </p>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th> Date </th>
-        <th> Paid By </th>
-        <th> Amount </th>
-        <th colspan="3" class="text-center"> Actions</th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% @splitwises.each do |splitwise| %>
-        <tr>
-          <td><%= splitwise.purchased_at%></td>
-          <td><%= splitwise.purchasee.first_name%></td>
-          <td><%= splitwise.price%></td>
-          <td>
-              <%= link_to 'Show', splitwise, class: 'btn btn-success' %>
-          </td>
-          <td>
-              <%= link_to 'Edit', edit_splitwise_path(splitwise), class: 'btn btn-warning' %>
-          </td>
-          <td>
-              <%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <% @splitwises.each do |splitwise| %>
+    <div class="card text-center">
+      <div class="card-header">
+        <%= splitwise.purchasee.first_name%>
+      </div>
+      <div class="card-block">
+        <h4 class="card-title"><%= splitwise.price%></h4>
+        <%= link_to 'Show', splitwise, class: 'btn btn-success' %>
+        <%= link_to 'Edit', edit_splitwise_path(splitwise), class: 'btn btn-warning' %>
+        <%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </div>
+      <div class="card-footer text-muted">
+        <%= splitwise.purchased_at%>
+      </div>
+    </div>
+  <% end %>
 </div>
