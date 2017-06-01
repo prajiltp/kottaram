@@ -12,20 +12,22 @@
   </head>
 
   <body class='inner-page'>
-    <%if current_user%>
-      <ul class="nav nav-pills">
-        <li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
-          <div class="dropdown-menu">
-            <%= link_to 'splitwise', splitwises_path, class: 'dropdown-item'%>
-            <%= link_to 'Events', events_path, class: 'dropdown-item'%>
-            <%= link_to 'Analytics', analysis_splitwises_path, class: 'dropdown-item'%>
-            <div class="dropdown-divider"></div>
+    <div class="container">
+      <%if current_user%>
+        <ul class="nav nav-pills">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+            <div class="dropdown-menu">
+              <%= link_to 'splitwise', splitwises_path, class: 'dropdown-item'%>
+              <%= link_to 'Events', events_path, class: 'dropdown-item'%>
+              <%= link_to 'Analytics', analysis_splitwises_path, class: 'dropdown-item'%>
+              <div class="dropdown-divider"></div>
               <%= link_to('Logout', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item') %>
             </div>
-        </li>
-      </ul>
-    <%end%>
+          </li>
+        </ul>
+      <%end%>
+    </div>
     <%= yield %>
   </body>
 </html>
