@@ -12,14 +12,22 @@
   </head>
 
   <body class='inner-page'>
-    <div>
-      <%if current_user%>
-        <%= link_to('Logout', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'logout') %>
-        <%= link_to 'splitwise', splitwises_path, class: 'menu'%>
-        | <%= link_to 'Events', events_path, class: 'menu'%>
-        | <%= link_to 'Analytics', analysis_splitwises_path, class: 'menu'%>
-      <%end%>
-    </div>
+    <%if current_user%>
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <%= link_to 'splitwise', splitwises_path, class: 'nav-link'%>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Events', events_path, class: 'nav-link'%>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Analytics', analysis_splitwises_path, class: 'nav-link'%>
+        </li>
+        <li class="nav-item">
+          <%= link_to('Logout', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'nav-link') %>
+        </li>
+      </ul>
+    <%end%>
     <%= yield %>
   </body>
 </html>
