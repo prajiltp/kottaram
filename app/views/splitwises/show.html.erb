@@ -1,11 +1,40 @@
 <p id="notice"><%= notice %></p>
-  Purchased ON: <%= @splitwise.purchased_at %></br>
-  Item Name: <%= @splitwise.item_name %></br>
-  Item Description: <%= @splitwise.description %></br>
-  Price: <%= @splitwise.price%></br>
-  Quantity: <%= @splitwise.quantity%></br>
-  Remaining Quantity: <%= @splitwise.remaining_quantity%></br>
-  Purchased by: <%= @splitwise.purchasee.first_name%></br>
-  Added by: <%= @splitwise.creator.first_name%>
-<%= link_to 'Edit', edit_splitwise_path(@splitwise) %> |
-<%= link_to 'Back', splitwises_path %>
+
+<ul class="list-group">
+  <li class="list-group-item justify-content-between">
+    <span class="badge badge-default badge-pill">Purchased ON</span>
+    <%= @splitwise.purchased_at %>
+  </li>
+  <li class="list-group-item justify-content-between">
+    <span class="badge badge-default badge-pill">Item Name</span>
+    <%= @splitwise.item_name %>
+  </li>
+  <li class="list-group-item justify-content-between">
+    <span class="badge badge-default badge-pill">Item Description</span>
+    <%= @splitwise.description %>
+  </li>
+  <li class="list-group-item justify-content-between">
+    <span class="badge badge-default badge-pill">Price</span>
+    <%= @splitwise.price%>
+  </li>
+  <li class="list-group-item justify-content-between">
+    <span class="badge badge-default badge-pill">Quantity</span>
+    <%= @splitwise.quantity%>
+  </li>
+  <li class="list-group-item justify-content-between">
+    <span class="badge badge-default badge-pill">Remaining Quantity</span>
+    <%= @splitwise.remaining_quantity%>
+  </li>
+  <li class="list-group-item justify-content-between">
+    <span class="badge badge-default badge-pill">Purchased by</span>
+    <%= @splitwise.purchasee.first_name%>
+  </li>
+  <li class="list-group-item justify-content-between">
+    <span class="badge badge-default badge-pill">Added by</span>
+    <%= @splitwise.creator.first_name%>
+  </li>
+</ul>
+<div class="btn-group" role="group" aria-label="Basic example">
+    <%= link_to 'Edit', edit_splitwise_path(@splitwise), class : 'btn btn-secondary' %>
+    <%= link_to 'Back', splitwises_path , class : 'btn btn-secondary'%>
+</div>
