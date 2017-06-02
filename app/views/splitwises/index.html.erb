@@ -21,9 +21,11 @@
             </div>
             <div class="card-block">
               <h4 class="card-title"><%= splitwise.price%></h4>
-              <%= link_to 'Show', splitwise, class: 'btn btn-success' %>
-              <%= link_to 'Edit', edit_splitwise_path(splitwise), class: 'btn btn-warning' %>
-              <%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+              <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+                <%= link_to 'Show', splitwise, class: 'btn btn-success' %>
+                <%= link_to 'Edit', edit_splitwise_path(splitwise), class: 'btn btn-warning' %>
+                <%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+              </div>
             </div>
             <div class="card-footer text-muted">
               <%= splitwise.purchased_at%>
