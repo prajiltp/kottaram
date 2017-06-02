@@ -12,21 +12,25 @@
     </p>
   </div>
   <div class="container pl-50 pr-50">
-    <% @splitwises.each do |splitwise| %>
-      <div class="card text-center w-75 mb-2">
-        <div class="card-header">
-          <%= splitwise.purchasee.first_name%>
+    <div class="row">
+      <% @splitwises.each do |splitwise| %>
+        <div class="col-md-4">
+          <div class="card text-center w-75 mb-2">
+            <div class="card-header">
+              <%= splitwise.purchasee.first_name%>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><%= splitwise.price%></h4>
+              <%= link_to 'Show', splitwise, class: 'btn btn-success' %>
+              <%= link_to 'Edit', edit_splitwise_path(splitwise), class: 'btn btn-warning' %>
+              <%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            </div>
+            <div class="card-footer text-muted">
+              <%= splitwise.purchased_at%>
+            </div>
+          </div>
         </div>
-        <div class="card-block">
-          <h4 class="card-title"><%= splitwise.price%></h4>
-          <%= link_to 'Show', splitwise, class: 'btn btn-success' %>
-          <%= link_to 'Edit', edit_splitwise_path(splitwise), class: 'btn btn-warning' %>
-          <%= link_to 'Destroy', splitwise_path(splitwise), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </div>
-        <div class="card-footer text-muted">
-          <%= splitwise.purchased_at%>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
