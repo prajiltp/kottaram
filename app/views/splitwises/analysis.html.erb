@@ -3,13 +3,13 @@
 </p>
 <div class="container-fluid">
   <h1>Expense Log</h1>
-  <p>
-    <%= form_tag analysis_splitwises_path, method: 'get' do %>
-      <%= select_month(@date_time || Date.today) %>
-        <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year) %>
-          <%= submit_tag "Apply"%>
-            <% end %>
-  </p>
+  <div class="row">
+    <%= form_tag analysis_splitwises_path, method: 'get', class: "form-inline" do %>
+        <%= select_month(@date_time || Date.today), class: "custom-select mb-2 mr-sm-2 mb-sm-0" %>
+        <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year), class: "custom-select mb-2 mr-sm-2 mb-sm-0" %>
+          <%= submit_tag "Apply", class: "btn btn-primary"%>
+    <% end %>
+  </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4 mb-3">
       <div class="card">
@@ -42,9 +42,9 @@
             </tbody>
           </table>
           <div class="text-center">
-          <%if @monthly_purchase.size > 3%>
-            <%= link_to 'For more details visit', splitwises_path, class: 'btn btn-success'%>
-              <%end%>
+            <%if @monthly_purchase.size > 3%>
+              <%= link_to 'For more details visit', splitwises_path, class: 'btn btn-success'%>
+                <%end%>
           </div>
         </div>
         <div class="card-footer text-center">
@@ -95,8 +95,8 @@
             <div class="card-footer text-center">
               <h3>
               Total :<%= total_expense%>
-            </h3>
-            Per Head : <%= per_head_cost%>
+            </h3> Per Head :
+              <%= per_head_cost%>
             </div>
           </div>
     </div>
