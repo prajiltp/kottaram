@@ -12,7 +12,7 @@
   </p>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 ">
-      <div class="card text-center mx-auto">
+      <div class="card mx-auto">
         <div class="card-header">
           History
         </div>
@@ -50,17 +50,19 @@
               <%end%>
         </div>
         <div class="card-footer">
+          <h3>
           <span class="badge badge-success">
             Total :
             <%=@monthly_purchase.cost_of_purchase%>
           </span>
+          </h3>
         </div>
       </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4 ">
       <% total_expense = @monthly_purchase.total_expense%>
         <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f %>
-          <div class="card text-center mx-auto">
+          <div class="card mx-auto">
             <div class="card-header">
               Source based report
             </div>
@@ -94,14 +96,16 @@
               </table>
             </div>
             <div class="card-footer">
+              <h3>
               <span class="badge badge-success">
               Total :<%= total_expense%>
             </span>
+            </h3>
             </div>
           </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 ">
-      <div class="card text-center mx-auto">
+      <div class="card mx-auto">
         <div class="card-header">
           <h2>Summary</h2>
         </div>
@@ -133,8 +137,6 @@
           </table>
         </div>
         <div class="card-footer">
-          <span class="badge badge-success">
-          </span>
         </div>
       </div>
     </div>
