@@ -17,16 +17,14 @@
         <div class="panel-heading">Panel heading</div>
         <div class="panel-body">
           <dl class="dl-horizontal">
-          <% @monthly_purchase.first(3).each do |splitwise| %>
             <dt>Date of Purchased</dt>
-            <dd><%= splitwise.purchased_at%></dd>
+            <dd></dd>
             <dt>Purchased By</dt>
-            <dd><%= splitwise.purchasee.first_name%></dd>
+            <dd>...</dd>
             <dt>Updated By</dt>
-            <dd><%= splitwise.creator.first_name%></dd>
+            <dd>...</dd>
             <dt>Price</dt>
-            <dd><%= splitwise.price%></dd>
-          <% end %>
+            <dd>...</dd>
         </dl>
         </div>
       </div>
@@ -40,6 +38,22 @@
           </tr>
         </thead>
         <tbody>
+          <% @monthly_purchase.first(3).each do |splitwise| %>
+            <tr>
+              <td>
+                <%= splitwise.purchased_at%>
+              </td>
+              <td>
+                <%= splitwise.purchasee.first_name%>
+              </td>
+              <td>
+                <%= splitwise.creator.first_name%>
+              </td>
+              <td>
+                <%= splitwise.price%>
+              </td>
+            </tr>
+            <% end %>
               <tr>
                 <th colspan="3">Total</th>
                 <th colspan="3">
