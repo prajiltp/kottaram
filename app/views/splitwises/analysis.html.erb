@@ -55,93 +55,78 @@
         </div>
       </div>
     </div>
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 ">
+      <% total_expense = @monthly_purchase.total_expense%>
+        <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f %>
+          <div class="card text-center mx-auto">
+            <div class="card-header">
+              Source based report
+            </div>
+            <div class="card-block">
+              <table class="table table-sm table-responsive">
+                <thead>
+                  <tr>
+                    <th>Expence Source</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Rent</td>
+                    <td>
+                      <%= HouseInfo.first.try(:rent).to_f%>
+                    </td>
+                  </tr>
+                  <% @monthly_purchase.all.collect(&:purchasee).uniq.compact.each do |user| %>
+                    <tr>
+                      <%spent_amount = user.spent_amount(@date_time)%>
+                        <td>
+                          <%= user.first_name%>
+                        </td>
+                        <td>
+                          <%= spent_amount%>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer text-muted">
+              Total :
+              <%= total_expense%>
+            </div>
+          </div>
+    </div>
   </div>
-  <div class='analysis'>
-    <div class='analytics-left'>
+  <div class='analytics-mid'>
+    <div class='analytics-mid-inner'>
       <table>
         <thead>
           <tr>
-            <th> Date of Purchase</th>
-            <th> Purchased By</th>
-            <th> Updated By</th>
-            <th> Price</th>
+            <th> Name</th>
+            <th> Spend Amount</th>
+            <th> Bill Amount</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th colspan="3">Total</th>
-            <th colspan="3">
-            </th>
-          </tr>
+          <% User.billable(@date_time).each do |user| %>
+            <tr>
+              <td>
+                <%= user.first_name%>
+              </td>
+              <%spent_amount = user.spent_amount(@date_time)%>
+                <td>
+                  <%= user.spent_amount(@date_time)%>
+                </td>
+                <td>
+                  <%= per_head_cost - spent_amount%>
+                </td>
+            </tr>
+            <% end %>
         </tbody>
       </table>
-      <% total_expense = @monthly_purchase.total_expense%>
-        <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f %>
     </div>
-    <div class='analytics-mid'>
-      <div class='analytics-mid-inner'>
-        <table>
-          <thead>
-            <tr>
-              <th> Spend By / Rent</th>
-              <th> Spend Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Rent</td>
-              <td>
-                <%= HouseInfo.first.try(:rent).to_f%>
-              </td>
-            </tr>
-            <% @monthly_purchase.all.collect(&:purchasee).uniq.compact.each do |user| %>
-              <tr>
-                <%spent_amount = user.spent_amount(@date_time)%>
-                  <td>
-                    <%= user.first_name%>
-                  </td>
-                  <td>
-                    <%= spent_amount%>
-                  </td>
-              </tr>
-              <% end %>
-                <tr>
-                  <th>Total Cost</th>
-                  <th>
-                    <%= total_expense%>
-                  </th>
-                </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class='analytics-mid-inner'>
-        <table>
-          <thead>
-            <tr>
-              <th> Name</th>
-              <th> Spend Amount</th>
-              <th> Bill Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% User.billable(@date_time).each do |user| %>
-              <tr>
-                <td>
-                  <%= user.first_name%>
-                </td>
-                <%spent_amount = user.spent_amount(@date_time)%>
-                  <td>
-                    <%= user.spent_amount(@date_time)%>
-                  </td>
-                  <td>
-                    <%= per_head_cost - spent_amount%>
-                  </td>
-              </tr>
-              <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div style="clear:both;"></div>
   </div>
+  <div style="clear:both;"></div>
+</div>
 </div>
