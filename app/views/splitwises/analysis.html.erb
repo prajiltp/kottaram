@@ -11,18 +11,16 @@
             <% end %>
   </p>
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-6">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
       <div class="card text-center">
         <div class="card-header">
           History
         </div>
         <div class="card-block">
-          <h4 class="card-title">Special title treatment</h4>
           <dl class="row">
             <table class="table table-striped table-inverse">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Date of Purchased</th>
                   <th>Purchased By</th>
                   <th>Updated By</th>
@@ -32,7 +30,6 @@
               <tbody>
                 <% @monthly_purchase.first(3).each do |splitwise| %>
                   <tr>
-                    <th scope="row">1</th>
                     <td>
                       <%= splitwise.purchased_at%>
                     </td>
