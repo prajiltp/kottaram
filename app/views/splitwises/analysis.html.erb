@@ -30,7 +30,7 @@
               <% @monthly_purchase.first(3).each do |splitwise| %>
                 <tr>
                   <td>
-                    <%= splitwise.purchased_at%>
+                    <%= splitwise.purchased_at[0,10]%>
                   </td>
                   <td>
                     <%= splitwise.purchasee.first_name%>
