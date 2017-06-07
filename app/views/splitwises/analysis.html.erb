@@ -10,43 +10,58 @@
           <%= submit_tag "Apply"%>
             <% end %>
   </p>
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-6">
-    <div class="card text-center">
-      <div class="card-header">
-        History
-      </div>
-      <div class="card-block">
-        <h4 class="card-title">Special title treatment</h4>
-        <dl class="row">
-          <% @monthly_purchase.first(3).each do |splitwise| %>
-            <dt class="col-sm-4">Date of Purchased</dt>
-            <dd class="col-sm-8"><%= splitwise.purchased_at%></dd>
-            <dt class="col-sm-4">Purchased By</dt>
-            <dd class="col-sm-8"><%= splitwise.purchasee.first_name%></dd>
-            <dt class="col-sm-4">Updated By</dt>
-            <dd class="col-sm-8"><%= splitwise.creator.first_name%></dd>
-            <dt class="col-sm-4">Price</dt>
-            <dd class="col-sm-8"><%= splitwise.price%></dd>
-          <% end %>
-        </dl>
-        <%if @monthly_purchase.size > 3%>
-          <%= link_to 'For more details visit', splitwises_path, class: 'btn btn-success'%>
-        <%end%>
-      </div>
-      <div class="card-footer text-muted">
-        Total : <%=@monthly_purchase.cost_of_purchase%>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6">
+      <div class="card text-center">
+        <div class="card-header">
+          History
+        </div>
+        <div class="card-block">
+          <h4 class="card-title">Special title treatment</h4>
+          <dl class="row">
+            <table class="table table-striped table-inverse">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Date of Purchased</th>
+                  <th>Purchased By</th>
+                  <th>Updated By</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @monthly_purchase.first(3).each do |splitwise| %>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>
+                      <%= splitwise.purchased_at%>
+                    </td>
+                    <td>
+                      <%= splitwise.purchasee.first_name%>
+                    </td>
+                    <td>
+                      <%= splitwise.creator.first_name%>
+                    </td>
+                    <td>
+                      <%= splitwise.price%>
+                    </td>
+                  </tr>
+                  <% end %>
+              </tbody>
+            </table>
+            <%if @monthly_purchase.size > 3%>
+              <%= link_to 'For more details visit', splitwises_path, class: 'btn btn-success'%>
+                <%end%>
+        </div>
+        <div class="card-footer text-muted">
+          Total :
+          <%=@monthly_purchase.cost_of_purchase%>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
-
-
   <div class='analysis'>
     <div class='analytics-left'>
-
       <table>
         <thead>
           <tr>
@@ -57,13 +72,11 @@
           </tr>
         </thead>
         <tbody>
-              <tr>
-                <th colspan="3">Total</th>
-                <th colspan="3">
-
-                </th>
-              </tr>
-
+          <tr>
+            <th colspan="3">Total</th>
+            <th colspan="3">
+            </th>
+          </tr>
         </tbody>
       </table>
       <% total_expense = @monthly_purchase.total_expense%>
