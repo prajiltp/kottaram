@@ -130,7 +130,7 @@
                       <%= user.spent_amount(@date_time)%>
                     </td>
                     <td>
-                      <%= per_head_cost - spent_amount%>
+                      <%= (per_head_cost - spent_amount).round(2)%>
                     </td>
                 </tr>
                 <% end %>
