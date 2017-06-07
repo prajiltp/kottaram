@@ -11,7 +11,7 @@
             <% end %>
   </p>
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5 ">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4 ">
       <div class="card mx-auto">
         <div class="card-header text-center">
           <h2>History</h2>
@@ -22,7 +22,6 @@
               <tr>
                 <th>Date</th>
                 <th>Purchased</th>
-                <th class="hidden-xs hidden-sm">Updated</th>
                 <th>Price</th>
               </tr>
             </thead>
@@ -34,9 +33,6 @@
                   </td>
                   <td>
                     <%= splitwise.purchasee.first_name%>
-                  </td>
-                  <td class="hidden-xs hidden-sm">
-                    <%= splitwise.creator.first_name%>
                   </td>
                   <td>
                     <%= splitwise.price%>
@@ -108,7 +104,7 @@
           </div>
     </div>
     <div class="clearfix visible-xs-block"></div>
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 ">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4 ">
       <div class="card mx-auto">
         <div class="card-header">
           <h2>Summary</h2>
