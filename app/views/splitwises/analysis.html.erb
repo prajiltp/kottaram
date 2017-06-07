@@ -10,26 +10,43 @@
           <%= submit_tag "Apply"%>
             <% end %>
   </p>
-  <div class='analysis'>
-    <div class='analytics-left'>
-      <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">Panel heading</div>
-        <div class="panel-body">
-          <dl class="dl-horizontal">
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+    <div class="card text-center">
+      <div class="card-header">
+        History
+      </div>
+      <div class="card-block">
+        <h4 class="card-title">Special title treatment</h4>
+        <dl class="row">
           <% @monthly_purchase.first(3).each do |splitwise| %>
-            <dt>Date of Purchased</dt>
-            <dd><%= splitwise.purchased_at%></dd>
-            <dt>Purchased By</dt>
-            <dd><%= splitwise.purchasee.first_name%></dd>
-            <dt>Updated By</dt>
-            <dd><%= splitwise.creator.first_name%></dd>
-            <dt>Price</dt>
-            <dd><%= splitwise.price%></dd>
+            <dt class="col-sm-4">Date of Purchased</dt>
+            <dd class="col-sm-8"><%= splitwise.purchased_at%></dd>
+            <dt class="col-sm-4">Purchased By</dt>
+            <dd class="col-sm-8"><%= splitwise.purchasee.first_name%></dd>
+            <dt class="col-sm-4">Updated By</dt>
+            <dd class="col-sm-8"><%= splitwise.creator.first_name%></dd>
+            <dt class="col-sm-4">Price</dt>
+            <dd class="col-sm-8"><%= splitwise.price%></dd>
           <% end %>
         </dl>
-        </div>
+        <%if @monthly_purchase.size > 3%>
+          <%= link_to 'For more details visit', splitwises_path, class: 'btn btn-success'%>
+        <%end%>
       </div>
+      <div class="card-footer text-muted">
+        Total : <%=@monthly_purchase.cost_of_purchase%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <div class='analysis'>
+    <div class='analytics-left'>
+
       <table>
         <thead>
           <tr>
@@ -43,14 +60,10 @@
               <tr>
                 <th colspan="3">Total</th>
                 <th colspan="3">
-                  <%=@monthly_purchase.cost_of_purchase%>
+
                 </th>
               </tr>
-              <%if @monthly_purchase.size > 3%>
-                <tr>
-                  <%= link_to 'For more details visit', splitwises_path, class: 'menu'%>
-                </tr>
-                <%end%>
+
         </tbody>
       </table>
       <% total_expense = @monthly_purchase.total_expense%>
