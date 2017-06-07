@@ -60,7 +60,7 @@
     <div class="clearfix visible-xs-block"></div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4 ">
       <% total_expense = @monthly_purchase.total_expense%>
-        <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f %>
+        <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f.round(2) %>
           <div class="card mx-auto">
             <div class="card-header text-center">
               <h2>Source based report</h2>
@@ -130,7 +130,7 @@
                       <%= user.spent_amount(@date_time)%>
                     </td>
                     <td>
-                      <%= (per_head_cost - spent_amount).round(2)%>
+                      <%= per_head_cost - spent_amount%>
                     </td>
                 </tr>
                 <% end %>
