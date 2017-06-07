@@ -49,13 +49,15 @@
             <%= link_to 'For more details visit', splitwises_path, class: 'btn btn-success'%>
               <%end%>
         </div>
-        <div class="card-footer text-muted">
-          Total :
-          <%=@monthly_purchase.cost_of_purchase%>
+        <div class="card-footer">
+          <span class="badge badge-success">
+            Total :
+            <%=@monthly_purchase.cost_of_purchase%>
+          </span>
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 ">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4 ">
       <% total_expense = @monthly_purchase.total_expense%>
         <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f %>
           <div class="card text-center mx-auto">
@@ -91,9 +93,11 @@
                 </tbody>
               </table>
             </div>
-            <div class="card-footer text-muted">
-              Total :
-              <%= total_expense%>
+            <div class="card-footer">
+            <span class="badge badge-success">
+              Total :<%= total_expense%>
+            </span>
+
             </div>
           </div>
     </div>
