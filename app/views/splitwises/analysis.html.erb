@@ -5,8 +5,8 @@
   <h1>Expense Log</h1>
   <div class="row">
     <%= form_tag analysis_splitwises_path, method: 'get', class: 'form-inline' do %>
-        <%= select_month(@date_time || Date.today, :class=> 'custom-select mb-2 mr-sm-2 mb-sm-0')  %>
-        <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year, :class=> 'custom-select mb-2 mr-sm-2 mb-sm-0') %>
+        <%= select_month(@date_time || Date.today, :class=> '.custom-select .mb-2 .mr-sm-2 .mb-sm-0')  %>
+        <%= select_year(@date_time || Date.today, :start_year => Date.today.year, :end_year => 8.years.from_now.year, :class=> '.custom-select .mb-2 .mr-sm-2 .mb-sm-0') %>
           <%= submit_tag 'Apply', class: 'btn btn-primary'%>
     <% end %>
   </div>
