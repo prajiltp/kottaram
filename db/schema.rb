@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315062336) do
+ActiveRecord::Schema.define(version: 20170801053954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(version: 20170315062336) do
     t.float    "rent"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+  end
+
+  create_table "penalties", force: :cascade do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.integer  "type"
+    t.float    "amount"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "creator_id"
+    t.integer  "approver_id"
+    t.integer  "status",      default: 0
+    t.text     "description"
   end
 
   create_table "splitwises", force: :cascade do |t|

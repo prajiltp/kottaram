@@ -80,16 +80,4 @@ class SplitwisesController < ApplicationController
       params.require(:splitwise).permit(:quantity, :price, :remaining_quantity,
        :purchased_at, :created_by, :item_name, :description, :purchased_by)
     end
-
-    def month
-      params[:date] ? (params[:date][:month] || Date.today.month) : Date.today.month
-    end
-
-    def year
-      params[:date] ? (params[:date][:year] || Date.today.year) : Date.today.year
-    end
-
-    def date_time
-      Time.new(year, month, '1', 0, 0 , 0)
-    end
 end

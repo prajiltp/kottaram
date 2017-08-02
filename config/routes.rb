@@ -21,4 +21,10 @@ Rails.application.routes.draw do
       get 'analysis'
     end
   end
+
+  resources :penalties do
+    member do
+      get 'approve'
+    end
+  end
 end

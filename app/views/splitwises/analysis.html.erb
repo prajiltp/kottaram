@@ -57,7 +57,7 @@
     </div>
     <div class="clearfix visible-xs-block"></div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4 mb-3">
-      <% total_expense = @monthly_purchase.total_expense%>
+      <% total_expense = @monthly_purchase.total_expense(@date_time)%>
         <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f.round(2) %>
           <div class="card">
             <div class="card-header text-center">
@@ -76,6 +76,12 @@
                     <td>Rent</td>
                     <td>
                       <%= HouseInfo.first.try(:rent).to_f%>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Penalty</td>
+                    <td>
+                      <%= Penalty.monthly_penalty(@date_time).sum(&:amount)%>
                     </td>
                   </tr>
                   <% @monthly_purchase.all.collect(&:purchasee).uniq.compact.each do |user| %>
@@ -112,6 +118,7 @@
               <tr>
                 <th> Name</th>
                 <th> Spend</th>
+                <th> Penalty</th>>
                 <th> Payable</th>
               </tr>
             </thead>
@@ -122,12 +129,16 @@
                     <%= user.first_name%>
                   </td>
                   <%spent_amount = user.spent_amount(@date_time)%>
-                    <td>
-                      <%= user.spent_amount(@date_time)%>
-                    </td>
-                    <td>
-                      <%= (per_head_cost - spent_amount).round(2)%>
-                    </td>
+                  <td>
+                    <%= spent_amount%>
+                  </td>
+                  <%penalty = user.penalty(@date_time)%>
+                  <td>
+                    <%= penalty%>
+                  </td>
+                  <td>
+                    <%= (per_head_cost - spent_amount + penalty).round(2)%>
+                  </td>
                 </tr>
                 <% end %>
             </tbody>

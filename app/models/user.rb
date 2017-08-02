@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :groups, through: :user_groups
   has_many :events, through: :groups
   has_many :splitwises, foreign_key: :purchased_by
+  has_many :penalties, foreign_key: :user_id
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          :omniauthable, :omniauth_providers => [:google_oauth2]
@@ -41,6 +43,10 @@ class User < ApplicationRecord
 
   def part_of?(group)
     group.users.include? self
+  end
+
+  def penalty(date_time)
+    penalties.monthly_penalty(date_time).sum(&:amount)
   end
 
   private
