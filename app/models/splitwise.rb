@@ -14,7 +14,7 @@ class Splitwise < ApplicationRecord
 
 		def total_expense(date_time)
 			cost = cost_of_purchase
-      total_penalty = Penalty.monthly_penalty(date_time).sum(&:amount)
+      total_penalty = Penalty.billable_penalty_amount(date_time)
 		  # Considering only one house now
 		  rent = HouseInfo.first.try(:rent).to_f
 		  total_expense = cost + rent - total_penalty

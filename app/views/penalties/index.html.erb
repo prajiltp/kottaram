@@ -12,6 +12,8 @@
     </p>
   </div>
   <div class="container pl-50 pr-50">
+    <p id="error"><%= flash[:error] %></p>
+
     <div class="row">
       <% @penalties.each do |penalty| %>
         <div class="col-12 col-sm-6 col-md-3">

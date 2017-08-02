@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def penalty(date_time)
-    penalties.monthly_penalty(date_time).sum(&:amount)
+    penalties.billable_penalty_amount(date_time)
   end
 
   private

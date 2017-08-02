@@ -81,7 +81,7 @@
                   <tr>
                     <td>Penalty</td>
                     <td>
-                      <%= Penalty.monthly_penalty(@date_time).sum(&:amount)%>
+                      <%= Penalty.billable_penalty_amount(@date_time)%>
                     </td>
                   </tr>
                   <% @monthly_purchase.all.collect(&:purchasee).uniq.compact.each do |user| %>

@@ -6,6 +6,6 @@ class PenaltyPolicy < ApplicationPolicy
 
   def approve?
   	# Non creator can approve
-    record.unconfirmed? && (@user != record.creator)
+    record.unconfirmed? && ((@user != record.creator) || (@user == record.user))
   end
 end
