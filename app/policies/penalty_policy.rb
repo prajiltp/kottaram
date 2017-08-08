@@ -8,4 +8,8 @@ class PenaltyPolicy < ApplicationPolicy
   	# Non creator can approve
     record.unconfirmed? && ((@user != record.creator) || (@user == record.user))
   end
+
+  def update?
+  	record.unconfirmed
+  end
 end

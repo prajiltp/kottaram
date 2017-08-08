@@ -31,6 +31,7 @@ class PenaltiesController < ApplicationController
   end
 
   def update
+    authorize @penalty
     respond_to do |format|
       if @penalty.update(penalty_params)
         format.html { redirect_to @penalty, notice: 'penalty was successfully updated.' }
