@@ -47,7 +47,7 @@
                 <%end%>
           </div>
         </div>
-        <div class="card-footer text-center">
+        <div class="card-footer text-center" >
           <h3>
             Total :
             <%=@monthly_purchase.cost_of_purchase%>
@@ -112,14 +112,16 @@
         <div class="card-header">
           <h2>Summary</h2>
         </div>
-        <div class="card-block mx-auto">
+        <div class="card-block mx-auto" style="max-width: 100%;">
           <table class="table table-sm table-responsive">
             <thead>
               <tr>
                 <th> Name</th>
                 <th> Spend</th>
-                <th> Penalty</th>>
+                <th> Penalty</th>
                 <th> Payable</th>
+                <th> Paid</th>
+
               </tr>
             </thead>
             <tbody>
@@ -139,6 +141,20 @@
                   <td>
                     <%= (per_head_cost - spent_amount + penalty).round(2)%>
                   </td>
+                  <%payment_status = user.payment_status(@date_time)%>
+                  <td>
+                    <%if current_user.eligible_to_mark_payment(@date_time)%>
+                      <label class="switch switch-primary">
+                          <%if payment_status.paid%>
+                            <input id="toggle-event" type="checkbox" data-toggle="toggle", checked="checked", url=<%=change_payment_status_user_path(user, payment_id: payment_status.id)%> class="toogled-item">
+                          <%else%>
+                            <input id="toggle-event" type="checkbox" data-toggle="toggle", url=<%=change_payment_status_user_path(user, payment_id: payment_status.id)%> class="toogled-item">
+                          <%end%>
+                      </label>
+                    <%else%>
+                      <%= payment_status.try(:paid)%>
+                    <%end%>
+                  </td>
                 </tr>
                 <% end %>
             </tbody>
@@ -150,4 +166,25 @@
     </div>
   </div>
 </div>
-</div>
+
+<script type="text/javascript">
+  $(function() {
+      $('.toogled-item').change(function() {
+        $url = this.attributes.url.value
+        console.log($url)
+
+        $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+        $.ajax({
+           type: 'PUT',
+           url: $url,
+           data: {},
+           success: function(data, status, xhr) {
+               console.log('success!!!');
+           },
+           error: function(xhr, status, err) {
+               console.log('error!!!');
+           }
+        });
+      })
+  })
+</script>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801053954) do
+ActiveRecord::Schema.define(version: 20170809060112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20170801053954) do
     t.float    "rent"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+  end
+
+  create_table "payment_statuses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "paid",       default: false
+    t.text     "year_month"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "penalties", force: :cascade do |t|
@@ -97,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170801053954) do
     t.boolean  "active",                 default: true
     t.datetime "de_activated_at"
     t.datetime "joined_at"
+    t.integer  "role",                   default: 0
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 

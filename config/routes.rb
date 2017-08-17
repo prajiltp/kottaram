@@ -4,6 +4,12 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'omniauth_callbacks'
   }
 
+  resources :users, only: [:show] do
+    member do
+      put 'change_payment_status'
+    end
+  end
+
   resources :events, only: [:index] do
   	member do
   	  put 'generate_group'
