@@ -13,11 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require datetimepicker
-//= require turbolinks
 //= require_tree .
 //= require bootstrap
-//= require jquery
-//= require jquery_ujs
 //= require_tree .
 
 //= require highcharts/highcharts
