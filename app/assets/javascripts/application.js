@@ -12,9 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require datetimepicker
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
 //= require highcharts/modules/no-data-to-display
 //= require_tree .
 //= require bootstrap
+//= require datetimepicker
+
