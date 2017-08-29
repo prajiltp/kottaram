@@ -16,6 +16,7 @@
 //= require highcharts/highcharts-more
 //= require highcharts/modules/no-data-to-display
 //= require_tree .
-//= require bootstrap
 //= require datetimepicker
+
+//= require bootstrap
 
