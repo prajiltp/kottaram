@@ -57,8 +57,14 @@ class SplitwisesController < ApplicationController
   def destroy
     @splitwise.destroy
     respond_to do |format|
-      format.html { redirect_to splitwises_url, notice: 'Splitwise was successfully destroyed.' }
-      format.json { head :no_content }
+      if @splitwise.destroy
+        format.html { redirect_to splitwises_url, notice: 'Splitwise was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { render :edit }
+
+        format.json { render json: @splitwise.errors, status: :unprocessable_entity }
+      end
     end
   end
 

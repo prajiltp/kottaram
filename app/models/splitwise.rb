@@ -4,6 +4,8 @@ class Splitwise < ApplicationRecord
   before_validation :convert_to_utc
 
   validates :price, presence: true
+  validate :purchased_month
+  before_destroy :purchased_month_valid?
 
   scope :monthly_purchase, -> (date) {where('purchased_at >=? and purchased_at <= ?',
   	date.beginning_of_month, date.end_of_month)}
@@ -25,9 +27,23 @@ class Splitwise < ApplicationRecord
 		end
   end
 
+  def purchased_month_valid?
+    purchased_month
+    unless self.errors.blank?
+      false
+      throw(:abort)
+    end
+  end
+
   private
 
   def convert_to_utc
   	self.purchased_at = Time.parse("#{self.purchased_at}").utc.iso8601 if purchased_at
+  end
+
+  def purchased_month
+    if Time.now.utc.month > purchased_at.month
+      self.errors.add(:purchased_at, 'You can not add or update a bill on previous month')
+    end
   end
 end
