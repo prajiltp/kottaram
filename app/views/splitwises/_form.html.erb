@@ -39,6 +39,10 @@
       <td>Purchased_by:</td>
       <td><%= f.collection_select :purchased_by, User.order(:first_name), :id, :first_name, selected: (f.object.new_record? ? current_user.id : f.object.purchased_by) %></td>
     </tr>
+    <tr>
+      <td>Apply To:</td>
+      <td><%= f.collection_select :subscription_id, Subscription.order(:name), :id, :name, selected: (f.object.new_record? ? nil : nil) %></td>
+    </tr>
   </table>
   <div class="actions">
     <%= f.submit %>

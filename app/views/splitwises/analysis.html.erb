@@ -58,7 +58,8 @@
     <div class="clearfix visible-xs-block"></div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4 mb-3">
       <% total_expense = @monthly_purchase.total_expense(@date_time)%>
-        <% per_head_cost = (total_expense/User.billable(@date_time).count).to_f.round(2) %>
+        <%billable_users_count = User.billable(@date_time).count%>
+        <% per_head_cost = (total_expense/billable_users_count).to_f.round(2) %>
           <div class="card">
             <div class="card-header text-center">
               <h2>Source based report</h2>
@@ -74,8 +75,9 @@
                 <tbody>
                   <tr>
                     <td>Rent</td>
+                    <%rent = HouseInfo.rent_for(@date_time)%>
                     <td>
-                      <%= HouseInfo.rent_for(@date_time)%>
+                      <%= rent%>
                     </td>
                   </tr>
                   <tr>
@@ -84,6 +86,14 @@
                       <%= Penalty.billable_penalty_amount(@date_time)%>
                     </td>
                   </tr>
+                  <% Subscription.all.each do |sub|%>
+                    <tr>
+                      <td><%=sub.name.camelcase%></td>
+                      <td>
+                        <%= sub.monthly_cost(@date_time).round(2)%>
+                      </td>
+                    </tr>
+                  <%end%>
                   <% @monthly_purchase.all.collect(&:purchasee).uniq.compact.each do |user| %>
                     <tr>
                       <%spent_amount = user.spent_amount(@date_time)%>
@@ -99,10 +109,29 @@
               </table>
             </div>
             <div class="card-footer text-center">
+              <table>
+              <% Subscription.all.each do |sub|%>
+                  <tr>
+                    <td><%=sub.name.camelcase%></td>
+                    <td>
+                      <% applicable_user = sub.applicable_user(@date_time).count()%>
+                      Per head of subscribers:
+                      <%if applicable_user > 0%>
+                        <%= (sub.monthly_cost(@date_time) / applicable_user).round(2)%>
+                      <%else%>
+                        0
+                      <%end%>
+                    </td>
+                  </tr>
+                <%end%>
+                </table>
+                <%other_expense = Splitwise.other_expense(@date_time)%>
+                Other expenses: <%= other_expense%>
               <h3>
-              Total :<%= total_expense%>
-            </h3> Per Head :
-              <%= per_head_cost%>
+                <%per_head_other_expense = other_expense / billable_users_count%>
+              </h3> Per Head Rent:
+              <%avg_rent = rent/billable_users_count%>
+              <%= avg_rent%>
             </div>
           </div>
     </div>
@@ -138,8 +167,9 @@
                   <td>
                     <%= penalty%>
                   </td>
+                  <%per_head_subscriped_expense = user.subscribed_expense(@date_time)%>
                   <td>
-                    <%= (per_head_cost - spent_amount + penalty).round(2)%>
+                    <%= (per_head_other_expense + per_head_subscriped_expense + avg_rent - spent_amount + penalty).round(2)%>
                   </td>
                   <%payment_status = user.payment_status(@date_time)%>
                   <td>

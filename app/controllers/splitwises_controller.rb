@@ -85,7 +85,8 @@ class SplitwisesController < ApplicationController
       params[:splitwise][:created_by] = current_user.id
       params[:splitwise][:purchased_by] ||= current_user.id
       params.require(:splitwise).permit(:quantity, :price, :remaining_quantity,
-       :purchased_at, :created_by, :item_name, :description, :purchased_by)
+       :purchased_at, :created_by, :item_name, :description, :purchased_by,
+       :subscription_id)
     end
 
     def set_pie_diagram
